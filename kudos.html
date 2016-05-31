@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<?!= include('mainCSS'); ?>
+</head>
+
+<body>
+<div id="container">
+<img src="https://ccbbe2b5f343860f8cc17353cafe4ea07e9b11de.googledrive.com/host/0B1lSSVVLxjNYfkFhc1ZyWVphUTNIQkJfMl9MWXYtYU10TDN3NTBGSVRvVU1zMU9aa3l5bTQ/kudos.png" width="528">
+</div>
+</br>
+</br>
+</br>
+<!-- This scriptlet pulls in the server side parameters -->
+<?
+var toParam = data.to;
+var fromParam = data.from;
+var dateParam = data.date;
+var commentParam = data.comment;
+var gifParam = data.gif;
+var stickersParam = data.stickers;
+var chartParam = data.chart;
+?>
+  
+<div id="formContainer">
+   <form class="form" action="">
+        <label class="desc">To:</label>
+        <label class="content"><?= toParam ?></label></br>
+        <label class="desc">From:</label>
+        <label class="content"><?= fromParam ?></label></br>
+        <label class="desc">Date:</label>
+        <label class="content"><?= dateParam ?></label></br>
+        </br>
+        <label class="desc">Description: </label></br>
+        <label class="content"><?= commentParam ?></label>
+    </form>
+</div>
+<?
+if( gifParam.length > 0 ) { ?>
+      <br><br><div><img src="<?=gifParam?>"></div>
+      <? }; ?>
+<?
+if( stickersParam.length > 0 ) { ?>
+      <br><br><div>
+      <? for(i=0;i<stickersParam.length;i++) { ?>
+      <img src=<?!=stickersParam[i]?>>
+      <? };
+      }; ?>
+      </div>
+      <br>
+      <br>
+      <div>
+      <img src="https://ccbbe2b5f343860f8cc17353cafe4ea07e9b11de.googledrive.com/host/0B1lSSVVLxjNYfkFhc1ZyWVphUTNIQkJfMl9MWXYtYU10TDN3NTBGSVRvVU1zMU9aa3l5bTQ/giphy_img.png">
+      </div>
+      <div id="chartDiv"></div>
+      <script src="//cdn.zingchart.com/zingchart.min.js"></script>
+<script>
+  window.onload=function(){
+    zingchart.render({ 
+      id:'chartDiv',
+      data: <?=JSON.stringify(chartParam) ?>,
+      height:400,
+      width:600
+    });
+  };
+</script>
+      
+</body>
+</html>
